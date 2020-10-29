@@ -11,20 +11,27 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
     {
         public static void csvToXML(string csvLocalRoute)
         {
-            var fileReader = new StreamReader(File.OpenRead(csvLocalRoute));
-            List<Oficina> oficinas = new List<Oficina>();
+            //TODO CHAPU PARA LEER DE LA BASE DE LA APP
+            string dir = System.IO.Directory.GetCurrentDirectory().Replace("\\bin\\Debug", "");
 
-            while (!fileReader.EndOfStream)
+            using (var fileReader = new StreamReader(File.OpenRead($"{dir}{csvLocalRoute}")))
             {
-                var row = fileReader.ReadLine();
+                List<Oficina> oficinas = new List<Oficina>();
 
-                string[] rowValues = row.Split(';');
+                while (!fileReader.EndOfStream)
+                {
+                    var row = fileReader.ReadLine();
 
-                var oficinaXml = OficinasRepository.createOficina(rowValues);
-                oficinas.Add(oficinaXml);
+                    string[] rowValues = row.Split(';');
 
-                Console.WriteLine(rowValues);
+                    var oficinaXml = OficinasRepository.createOficina(rowValues);
+                    oficinas.Add(oficinaXml);
+
+                    Console.WriteLine(rowValues);
+                }
             }
+
+            var i = 0;
         }
 
 

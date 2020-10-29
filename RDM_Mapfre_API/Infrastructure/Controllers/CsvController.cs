@@ -16,7 +16,7 @@ namespace RDM_Mapfre_API.Infrastructure.Controllers
         public IActionResult ConverteCVStoXMLs(string csvRoute)
         {
             //TO DO: Añadir acceso a fichero por medio de fichero provisional.
-            CSVtoXML.csvToXML(@"C:\Users\breogan.beceirocasti\Desktop\RDM\OFICINAS_20200603.csv");
+            CSVtoXML.csvToXML(@"\ficheros_oficinas\MyBusiness_25102020.csv");
 
             return Ok();
         }
