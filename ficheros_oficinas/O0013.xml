@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oficina id="O0013" tipo="DIRECTA">
+	<denominacion>LAS PALMAS - SIETE PALMAS</denominacion>
+	<ceco>0013</ceco>
+	<idDirTerritorial>09</idDirTerritorial>
+	<idDGT>35</idDGT>
+	<idOficinaDirecta>0013</idOficinaDirecta>
+	<idOficinaDelegada></idOficinaDelegada>
+	<direccion>PINTOR FELO MONZON 31</direccion>
+	<localidad>LAS PALMAS DE GRAN CANARIA</localidad>
+	<provincia>PALMAS, LAS</provincia>
+	<codigoPostal>35019</codigoPostal>
+	<horarioHabitual>L-V 09:00-14:00 / 16:00-19:00</horarioHabitual>
+	<horarioVerano>08:00-15:00</horarioVerano>
+	<horarioSabados></horarioSabados>
+	<periodoVerano></periodoVerano>
+	<abiertoSabados>N</abiertoSabados>
+	<telefono>928422349</telefono>
+	<fax>928412145</fax>
+	<clave_prod>5234105</clave_prod>
+	<miembros>
+		<miembro>
+			<nombre>ENRIQUE ABIETAR BRUNO</nombre>
+			<nuuma>EABIET</nuuma>
+			<perfil>Director</perfil>
+			<email>eabiet@mapfre.com</email>
+		</miembro>
+		<miembro>
+			<nombre>RICARDO CAMPOY MARTIN</nombre>
+			<nuuma>CMRICAR</nuuma>
+			<perfil></perfil>
+			<email>cmricar@mapfre.com</email>
+		</miembro>
+		<miembro>
+			<nombre>JESUS DAVID PEREZ RIVERO</nombre>
+			<nuuma>JESUSDP</nuuma>
+			<perfil></perfil>
+			<email>JESUSDP@mapfre.com</email>
+		</miembro>
+		<miembro>
+			<nombre>ROSA LAURA ANAYA GONZALEZ</nombre>
+			<nuuma>LANAYAG</nuuma>
+			<perfil></perfil>
+			<email>lanayag@mapfre.com</email>
+		</miembro>
+		<miembro>
+			<nombre>RUT MORALES CABRERA</nombre>
+			<nuuma>MORALR</nuuma>
+			<perfil></perfil>
+			<email>moralr@mapfre.com</email>
+		</miembro>
+		<miembro>
+			<nombre>MARIA DEL CARMEN GARCIA MARRERO</nombre>
+			<nuuma>CGARC25</nuuma>
+			<perfil></perfil>
+			<email>cgarc25@mapfre.com</email>
+		</miembro>
+		<miembro>
+			<nombre>DOLORES O'SHANAHAN ALVAREZ</nombre>
+			<nuuma>DOSHANA</nuuma>
+			<perfil></perfil>
+			<email>DOSHANA@mapfre.com</email>
+		</miembro>
+		<miembro>
+			<nombre>OLIVER ESPINO MARTIN</nombre>
+			<nuuma>OESPINO</nuuma>
+			<perfil></perfil>
+			<email>oespino@mapfre.com</email>
+		</miembro>
+		<miembro>
+			<nombre>MARIA DOLORES SANCHEZ VALERON</nombre>
+			<nuuma>SANCHMD</nuuma>
+			<perfil></perfil>
+			<email>sanchmd@mapfre.com</email>
+		</miembro>
+		<miembro>
+			<nombre>YANIRA SANCHEZ DAMIAN</nombre>
+			<nuuma>YANSANC</nuuma>
+			<perfil></perfil>
+			<email>yansanc@mapfre.com</email>
+		</miembro>
+</miembros>
+</oficina>
