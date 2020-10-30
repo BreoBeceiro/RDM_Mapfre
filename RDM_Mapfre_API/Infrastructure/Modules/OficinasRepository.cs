@@ -11,7 +11,7 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
         {
             Oficina office = new Oficina()
             {
-                //id
+                id = values[0],
                 denominacion = values[1],
                 codCeco = values[2],
                 codOficinaDirecta = values[3],
@@ -91,6 +91,8 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
                 //NUUMA MIEMBRO5
                 //PERFIL MIEMBRO5
                 //EMAIL MIEMBRO5
+                //responsables = new List<Responsable>(),
+                //miembros = new List<Miembro>(),
             };
 
             return office;
