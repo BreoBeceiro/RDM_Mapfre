@@ -15,10 +15,10 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
         //¿Método para obtener la ruta al fichero necesario por medio del YAML?
 
         //Método para probar la generación de una lista de objetos Oficina dado un CSV (se le extraerán responsabilidades):
+
         public static void csvToXML(string csvLocalRoute)
         {
-            //Leer el YAML para obtener las rutas a los archivos...
-            StreamReader yamlReader = new StreamReader(File.OpenRead(@"../../AppRoutes.yaml"));
+            var a = YamlReader.ReadYml("fileRoutes", "MyBusinessRoute");
 
             //TODO CHAPU PARA LEER DE LA BASE DE LA APP
             string dir = System.IO.Directory.GetCurrentDirectory().Replace("\\bin\\Debug", "");
@@ -54,6 +54,10 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
         public static void writeXML(string xmlCreationRoute)
         {
             //De este método se pueden extraer responsabilidades.
+
+            //TODO: EJEMPLO DE LECTURA DE YAML
+            var a = YamlReader.ReadYml("fileRoutes", "MyBusinessRoute");
+
 
             XmlWriter xmlWriter = XmlWriter.Create(xmlCreationRoute);
             XmlWriterSettings settings = new XmlWriterSettings();

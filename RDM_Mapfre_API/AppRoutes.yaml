@@ -1,16 +1,7 @@
-﻿# Application files routes.
-routes:
-    - name: MyBusiness
-      route: # CSV input route
-
-    - name: OficinasTotales
-      route: # XML output route 1
-
-    - name: OficinasEnAlta
-      route: # XML output route 2
-
-    - name: OficinasEnBaja
-      route: # XML output route 3
-
-    - name: OficinasModificadas
-      route: # XML output route 4
+﻿fileRoutes:
+    MyBusinessRoute: "MyBusinessRoute TEXT"
+    OficinasTotalesRoute: "OficinasTotales TEXT"
+    OficinasEnAltaRoute: "OficinasEnAlta TEXT"
+    OficinasEnBaja: "OficinasEnBaja TEXT"
+    OficinasModificadas: "OficinasModificadas TEXT"
+...
