@@ -11,64 +11,86 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
         {
             Oficina office = new Oficina()
             {
-                //CODIGO OFICINA
+                //id
                 denominacion = values[1],
-                ceco = values[2],
-                idOficinaDirecta = values[3],
-                idOficinaDelegada = values[4],
-                //CODIGO DT,
-                //DENOMINACION DT,
-                idDGT = values[7],
-                //DENOMINACION DGT
-                //CODIGO SUBCENTRAL
-                //DENOMINACION SUBCENTRAL
-                clave_prod = values[11],
-                //CODIGO TIPO OFICINA (en el objeto Oficina hay TIPO y TIPODEOFICINA)
-                //DENOMINACION TIPO DE OFICINA
-                //CODIGO TIPO VIA
-                //DENOMINACION TIPO VIA
-                //DENOMINACION VIA
-                //NUMERO VIA
-                //COMPLEMENTO DENOMINACION VIA
+                codCeco = values[2],
+                codOficinaDirecta = values[3],
+                codOficinaDelegada = values[4],
+                //codDirTerritorial,
+                //denominacionDirTerritorial,
+                codDGT = values[7],
+                //denominacionDGT
+                //codSubcentral
+                //denominacionSubcentral
+                claveProduccion = values[11],
+                //codTipo
+                //denominacionTipo
+                //codTipoVia
+                //denominacionTipoVia
+                //denominacionVia
+                //numeroVia
+                //complementoDenominacionVia
                 codigoPostal = values[19],
-                provincia = values[20],
-                //DENOMINAION PROVINCIA
-                localidad = values[22],
-                //DENOMINACION LOCALIDAD
-                //TELEFONOS OFICINA (en el objeto Oficina hay TELEFONO, TELEFONO2 y TELEFONO3)
+                codProvincia = values[20],
+                //denominacionProvincia
+                codLocalidad = values[22],
+                //denominacionLocalidad
+                //telefonosOficina1
+                //telefonosOficina2
+                //telefonosOficina3
                 fax = values[25],
-                //EMAIL OFICINA
+                //email
 
-                //HORARIO_NORMAL_W_M_INI
-                //HORARIO_NORMAL_W_M_FIN
-                //HORARIO_NORMAL_W_T_INI
-                //HORARIO_NORMAL_W_T_FIN
-                //HORARIO_NORMAL_V_M_INI
-                //HORARIO_NORMAL_V_M_FIN
-                //HORARIO_NORMAL_V_T_INI
-                //HORARIO_NORMAL_V_T_FIN
-                //HORARIO_NORMAL_S
-                //HORARIO_NORMAL_S_INI
-                //HORARIO_NORMAL_S_FIN
-
-                //HORARIO_VERANO_W_M_INI
-                //HORARIO_VERANO_W_M_FIN
-                //HORARIO_VERANO_W_T_INI
-                //HORARIO_VERANO_W_T_FIN
-                //HORARIO_VERANO_V_M_INI
-                //HORARIO_VERANO_V_M_FIN
-                //HORARIO_VERANO_V_T_INI
-                //HORARIO_VERANO_V_T_FIN
-                //HORARIO_VERANO_S
-                //HORARIO_VERANO_S_INI
-                //HORARIO_VERANO_S_FIN
+                //horarioNormalW
+                //horarioNormalV
+                //indHorarioNormalS
+                //horarioNormalS
+                //horarioVeranoW
+                //horarioVeranoV
+                //indHorarioVeranoS
+                //horarioVeranoS
+                //periodoVeranoSN
+                //periodoInicioVerano
+                //periodoFinVerano
+                //horarioObservaciones
+                //horarioObservacionesVerano
 
                 //CODIGO DEL RESPONSABLE
                 //NOMBRE DEL RESPONSABLE
                 //NUUMA RESPONSABLE
                 //PERFIL RESPONSABLE
                 //EMAIL RESPONSABLE
-                //LISTA DE OTROS MIEMBROS
+
+                //CODIGO DEL RESPONSABLE2
+                //NOMBRE DEL RESPONSABLE2
+                //NUUMA RESPONSABLE2
+                //PERFIL RESPONSABLE2
+                //EMAIL RESPONSABLE2
+
+                //NOMBRE DEL MIEMBRO1
+                //NUUMA MIEMBRO1
+                //PERFIL MIEMBRO1
+                //EMAIL MIEMBRO1
+
+                //NOMBRE DEL MIEMBRO2
+                //NUUMA MIEMBRO2
+                //PERFIL MIEMBRO2
+                //EMAIL MIEMBRO2
+
+                //NOMBRE DEL MIEMBRO3
+                //NUUMA MIEMBRO3
+                //PERFIL MIEMBRO3
+                //EMAIL MIEMBRO3
+
+                //NOMBRE DEL MIEMBRO4
+                //NUUMA MIEMBRO4
+                //PERFIL MIEMBRO4
+                //EMAIL MIEMBRO4
+
+                //NOMBRE DEL MIEMBRO5
+                //NUUMA MIEMBRO5
+                //PERFIL MIEMBRO5
+                //EMAIL MIEMBRO5
             };
 
             return office;

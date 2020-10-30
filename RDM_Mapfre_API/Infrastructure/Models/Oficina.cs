@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 [System.SerializableAttribute()]
@@ -8,61 +9,89 @@ public partial class Oficina
 {
     public string id { get; set; }
 
-    public string tipo { get; set; }
-
-    public string tipodeoficina { get; set; }
-
     public string denominacion { get; set; }
+    
+    public string codCeco { get; set; }
+    
+    public string codOficinaDirecta { get; set; }
+    
+    public string codOficinaDelegada { get; set; }
+    
+    public string codDirTerritorial { get; set; }
 
-    public string ceco { get; set; }
+    public string denominacionDirTerritorial { get; set; }
+    
+    public string codDGT { get; set; }
 
-    public string idDirTerritorial { get; set; }
+    public string denominacionDGT { get; set; }
 
-    public string idDGT { get; set; }
+    public string codSubcentral { get; set; }
 
-    public string idOficinaDirecta { get; set; }
+    public string denominacionSubcentral { get; set; }
 
-    public string idOficinaDelegada { get; set; }
+    public string claveProduccion { get; set; }
 
-    public string direccion { get; set; }
+    public string codTipo { get; set; }
 
-    public string localidad { get; set; }
+    public string denominacionTipo { get; set; }
 
-    public string provincia { get; set; }
+    public string codTipoVia { get; set; }
 
+    public string denominacionTipoVia { get; set; }
+
+    public string denominacionVia { get; set; }
+
+    public string numeroVia { get; set; }
+
+    public string complementoDenominacionVia { get; set; }
+    
     public string codigoPostal { get; set; }
+    
+    public string codProvincia { get; set; }
 
-    public string horarioHabitual { get; set; }
+    public string denominacionProvincia { get; set; }
 
-    public string horarioViernes { get; set; }
+    public string codLocalidad { get; set; }
 
-    public string abiertoSabados { get; set; }
+    public string denominacionLocalidad { get; set; }
 
-    public string horarioSabados { get; set; }
+    public string telefonosOficina1 { get; set; }
 
-    public string periodoVerano { get; set; }
+    public string telefonosOficina2 { get; set; }
 
-    public string horarioVerano { get; set; }
-
-    public string horarioHabitualVerano { get; set; }
-
-    public string horarioViernesVerano { get; set; }
-
-    public string abiertoSabadosVerano { get; set; }
-
-    public string horarioSabadosVerano { get; set; }
-
-    public string telefono { get; set; }
-
-    public string telefono2 { get; set; }
-
-    public string telefono3 { get; set; }
+    public string telefonosOficina3 { get; set; }
 
     public string fax { get; set; }
 
-    public string clave_prod { get; set; }
+    public string email { get; set; }
 
-    public OficinaMiembros miembros { get; set; }
+    public string horarioNormalW { get; set; }
 
-    public string[] text { get; set; }
+    public string horarioNormalV { get; set; }
+
+    public string indHorarioNormalS { get; set; }
+
+    public string horarioNormalS { get; set; }
+
+    public string horarioVeranoW { get; set; }
+
+    public string horarioVeranoV { get; set; }
+
+    public string indHorarioVeranoS { get; set; }
+
+    public string horarioVeranoS { get; set; }
+
+    public string periodoVeranoSN { get; set; }
+
+    public string periodoInicioVerano { get; set; }
+
+    public string periodoFinVerano { get; set; }
+
+    public string horarioObservaciones { get; set; }
+
+    public string horarioObservacionesVerano { get; set; }
+
+    public List<Responsable> responsables { get; set; }
+
+    public List<Miembro> miembros { get; set; }
 }

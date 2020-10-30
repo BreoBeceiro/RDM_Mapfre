@@ -15,8 +15,8 @@ namespace RDM_Mapfre_API.Infrastructure.Controllers
         [Route("CSVparser")]
         public IActionResult ConverteCVStoXMLs(string csvRoute)
         {
-            //TO DO: Añadir acceso a fichero por medio de fichero provisional.
-            CSVtoXML.csvToXML(@"\ficheros_oficinas\MyBusiness_25102020.csv");
+            //TO DO: Las rutas de los ficheros se almacenarán en el archivo 'AppRoutes.yaml':
+            CSVtoXML.writeXML(@"C:\Users\breogan.beceirocasti\Desktop\PruebaEscritura.xml");
 
             return Ok();
         }

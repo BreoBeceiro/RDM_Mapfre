@@ -1,7 +1,7 @@
 ﻿[System.SerializableAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-public partial class OficinaMiembrosResponsable
+public partial class Responsable
 {
     [System.Xml.Serialization.XmlElementAttribute("codResp", typeof(string))]
     [System.Xml.Serialization.XmlElementAttribute("email", typeof(string))]
