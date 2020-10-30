@@ -38,7 +38,7 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
 
 
 
-        //XML generado con tipos primitivos:
+        //XML generado con tipos primitivos (POR COMPLETAR):
         public static void arrayToXML_Primal(string[] matrix, string xmlCreationRoute)
         {
             XmlWriter xmlWriter = XmlWriter.Create(xmlCreationRoute);
@@ -67,7 +67,7 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
             xmlWriter.WriteEndDocument();
         }
 
-        //XML generado con objetos:
+        //XML generado con objetos (POTENCIALMENTE OBSOLETO):
         public static void arrayToXML_Object(string xmlCreationRoute)
         {
             XmlWriter xmlWriter = XmlWriter.Create(xmlCreationRoute);
