@@ -10,8 +10,6 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
 {
     public static class CSVtoXML
     {
-        //Métodos para comparar los CSVs y obtener las listas de oficinas (de alta, de baja y de modificación).
-
         /// <summary>
         /// Read a CSV file and fills an Oficina objects list with its content.
         /// </summary>
@@ -20,6 +18,7 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
         public static List<Oficina> readCSV(string csvLocalRoute)
         {
             List<Oficina> oficinas = new List<Oficina>();
+            var a = YamlReader.ReadYml("fileRoutes", "MyBusinessRoute");
 
             Stream file = File.OpenRead($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\MyBusiness_21072020.csv");
             var fileReader = new StreamReader(file);
@@ -65,8 +64,6 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
 
             foreach(Oficina office in offices) 
             { 
-                //office = OficinasRepository.createOficinaObject(fields);
-
                 xmlWriter.WriteStartElement("codigoOficina");
                 xmlWriter.WriteElementString("codigo", office.id);
                 xmlWriter.WriteEndElement();
