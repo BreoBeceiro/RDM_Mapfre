@@ -14,4 +14,14 @@ public partial class Responsable
     [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
     [System.Xml.Serialization.XmlIgnoreAttribute()]
     public ItemsChoiceType[] itemsElementName { get; set; }
+
+    public string codigo { get; set; }
+
+    public string nombre { get; set; }
+
+    public string nuuma { get; set; }
+
+    public string perfil { get; set; }
+
+    public string email { get; set; }
 }

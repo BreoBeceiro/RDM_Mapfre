@@ -15,8 +15,6 @@ namespace RDM_Mapfre_API
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            CSVtoXML.csvToXML("C:\\Users\breogan.beceirocasti\\Desktop\\RDM\\OFICINAS_20200603.csv");
-            Console.WriteLine();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

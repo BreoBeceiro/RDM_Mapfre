@@ -91,7 +91,5 @@ public partial class Oficina
 
     public string horarioObservacionesVerano { get; set; }
 
-    public List<Responsable> responsables { get; set; }
-
-    public List<Miembro> miembros { get; set; }
+    public Miembros miembros { get; set; }
 }

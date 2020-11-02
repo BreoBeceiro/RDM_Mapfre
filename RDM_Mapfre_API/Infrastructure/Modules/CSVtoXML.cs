@@ -10,282 +10,274 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
 {
     public static class CSVtoXML
     {
-        //Puede modularizarse un método readCSV() que reciba la ruta al arhivo y devuelva la colección de datos (el total de oficinas).
         //Métodos para comparar los CSVs y obtener las listas de oficinas (de alta, de baja y de modificación).
-        //¿Método para obtener la ruta al fichero necesario por medio del YAML?
-
-        //Método para probar la generación de una lista de objetos Oficina dado un CSV (se le extraerán responsabilidades):
-        public static void csvToXML(string csvLocalRoute)
-        {
-            //Leer el YAML para obtener las rutas a los archivos...
-            StreamReader yamlReader = new StreamReader(File.OpenRead(@"../../AppRoutes.yaml"));
-
-            //TODO CHAPU PARA LEER DE LA BASE DE LA APP
-            string dir = System.IO.Directory.GetCurrentDirectory().Replace("\\bin\\Debug", "");
-
-            using (var csvReader = new StreamReader(File.OpenRead($"{dir}{csvLocalRoute}")))
-            {
-                List<Oficina> oficinas = new List<Oficina>();
-
-                while (!csvReader.EndOfStream)
-                {
-                    var row = csvReader.ReadLine();
-
-                    string[] rowValues = row.Split(';');
-
-                    var oficinaXml = OficinasRepository.createOficina(rowValues);
-                    oficinas.Add(oficinaXml);
-
-                    Console.WriteLine(rowValues);
-                }
-            }
-
-            //var i = 0;
-        }
-
-
-
-
 
         /// <summary>
-        /// Lee un fichero CSV ubicado en el equipo y genera un XML con los datos del CSV en la ruta indicada.
+        /// Read a CSV file and fills an Oficina objects list with its content.
         /// </summary>
-        /// <param name="xmlCreationRoute">Ruta local en la que se creará el documento XML resultante.</param>
-        public static void writeXML(string xmlCreationRoute)
+        /// <param name="csvLocalRoute">Local route where CSV will be found.</param>
+        /// <returns>The resulting Oficina objects list.</returns>
+        public static List<Oficina> readCSV(string csvLocalRoute)
         {
-            //De este método se pueden extraer responsabilidades.
+            List<Oficina> oficinas = new List<Oficina>();
 
-            XmlWriter xmlWriter = XmlWriter.Create(xmlCreationRoute);
-            XmlWriterSettings settings = new XmlWriterSettings();
             Stream file = File.OpenRead($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\MyBusiness_21072020.csv");
-
-            settings.Indent = true;
-            settings.OmitXmlDeclaration = true;
-            settings.NewLineOnAttributes = true;
-
             var fileReader = new StreamReader(file);
-            //OJO: EL PRIMER PARÁMETRO DE Create ES EL FLUJO DE SALIDA, NO EL DE ENTRADA (CORREGIR).
-            //xmlWriter = XmlWriter.Create(file, settings);
+
+            #region "Aportaciones de Víctor"
+            //TODO CHAPU PARA LEER DE LA BASE DE LA APP (COMENTADO PARA PODER DEPURAR Y VALIDAR FUNCIONALIDAD):
+            //string dir = System.IO.Directory.GetCurrentDirectory().Replace("\\bin\\Debug", "");
+            //StreamReader yamlReader = new StreamReader(File.OpenRead(@"../../AppRoutes.yaml"));
+            //var csvReader = new StreamReader(File.OpenRead($"{dir}{csvLocalRoute}"));
+            #endregion
 
             var index = 0;
 
-            xmlWriter.WriteStartDocument();
-            xmlWriter.WriteStartElement("oficina");
-
             while (!fileReader.EndOfStream)
             {
+                var row = fileReader.ReadLine();
+
                 if (index == 0)
                 {
                     index++;
                     continue;
                 }
 
-                var row = fileReader.ReadLine();
+                string[] rowValues = row.Split(';');
 
-                string[] fields = row.Split(';');
-
-                xmlWriter.WriteStartElement("codigoOficina");
-                xmlWriter.WriteElementString("codigo", fields[0].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("denominacionOficina");
-                xmlWriter.WriteElementString("denominacion", fields[1].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("codigoCeco");
-                xmlWriter.WriteElementString("ceco", fields[2].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("codigoOficinaDirecta");
-                xmlWriter.WriteElementString("oficinaDirecta", fields[3].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("codigoOficinaDelegada");
-                xmlWriter.WriteElementString("oficinaDelegada", fields[4].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("codigoDT");
-                xmlWriter.WriteElementString("codDT", fields[5].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("denominacionDT");
-                xmlWriter.WriteElementString("denomDT", fields[6].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("codigoDGT");
-                xmlWriter.WriteElementString("codDGT", fields[7].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("denominacionDGT");
-                xmlWriter.WriteElementString("denomDGT", fields[8].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("codigoSubcentral");
-                xmlWriter.WriteElementString("codSubcentral", fields[9].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("denominacionSubcentral");
-                xmlWriter.WriteElementString("denomSubcentral", fields[10].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("claveProduccion");
-                xmlWriter.WriteElementString("claveProd", fields[11].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("codTipoOficina");
-                xmlWriter.WriteElementString("codTipoOf", fields[12].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("denominacionTipoOficina");
-                xmlWriter.WriteElementString("denomTipo", fields[13].ToString());
-                xmlWriter.WriteEndElement();
-
-                //DIRECCIÓN...
-                xmlWriter.WriteStartElement("codigoTipoVia");
-                xmlWriter.WriteElementString("codTipoVia", fields[14].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("denominacionTipoVia");
-                xmlWriter.WriteElementString("denomTipoVia", fields[15].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("denominacionVia");
-                xmlWriter.WriteElementString("denomVia", fields[16].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("numeroVia");
-                xmlWriter.WriteElementString("numVia", fields[17].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("complementoDenominacionVia");
-                xmlWriter.WriteElementString("compDenomVia", fields[18].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("codigoPostal");
-                xmlWriter.WriteElementString("codPostal", fields[19].ToString());
-                xmlWriter.WriteEndElement();
-
-                 //PROVINCIA...
-                xmlWriter.WriteStartElement("codigoProvincia");
-                xmlWriter.WriteElementString("codProvincia", fields[20].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("denominacionProvincia");
-                xmlWriter.WriteElementString("denomProvincia", fields[21].ToString());
-                xmlWriter.WriteEndElement();
-
-                //LOCALIDAD...
-                xmlWriter.WriteStartElement("codigoLocalidad");
-                xmlWriter.WriteElementString("codLocalidad", fields[22].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("denominacionLocalidad");
-                xmlWriter.WriteElementString("denomLocalidad", fields[23].ToString());
-                xmlWriter.WriteEndElement();
-
-                //TELÉFONOS...
-                xmlWriter.WriteStartElement("telefonosOficina1");
-                xmlWriter.WriteElementString("tlfsOficina1", fields[24].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("telefonosOficina2");
-                xmlWriter.WriteElementString("tlfsOficina2", fields[25].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("telefonosOficina3");
-                xmlWriter.WriteElementString("tlfsOficina3", fields[26].ToString());
-                xmlWriter.WriteEndElement();
-
-                //FAX/CORREO...
-                xmlWriter.WriteStartElement("faxOficina");
-                xmlWriter.WriteElementString("fax", fields[27].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("emailOficina");
-                xmlWriter.WriteElementString("email", fields[28].ToString());
-                xmlWriter.WriteEndElement();
-
-                //HORARIOS:
-                xmlWriter.WriteStartElement("horarioNormalW");
-                xmlWriter.WriteElementString("horaNormalW", fields[29].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("horarioNormalV");
-                xmlWriter.WriteElementString("horaNormalV", fields[30].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("indHorarioNormalS");
-                xmlWriter.WriteElementString("indHoraNormalS", fields[31].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("horarioNormalS");
-                xmlWriter.WriteElementString("horaNormalS", fields[32].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("horarioVeranoW");
-                xmlWriter.WriteElementString("horaVeranoW", fields[33].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("horarioVeranoV");
-                xmlWriter.WriteElementString("horaVeranoV", fields[34].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("indHorarioVeranoS");
-                xmlWriter.WriteElementString("indHoraVeranoS", fields[35].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("horarioVeranoS");
-                xmlWriter.WriteElementString("horarioVeranoS", fields[36].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("periodoVeranoSN");
-                xmlWriter.WriteElementString("perVeranoSN", fields[37].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("periodoInicioVerano");
-                xmlWriter.WriteElementString("perInicioVerano", fields[38].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("periodoFinVerano");
-                xmlWriter.WriteElementString("perFinVerano", fields[39].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("horarioObservaciones");
-                xmlWriter.WriteElementString("horaObservaciones", fields[40].ToString());
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("horarioObservacionesVerano");
-                xmlWriter.WriteElementString("horaObservacionesVerano", fields[41].ToString());
-                xmlWriter.WriteEndElement();
-
-                //RESPONSABLE1...
-
-                //RESPONSABLE2...
-
-                //MIEMBRO1...
-
-                //MIEMBRO2...
-
-                //MIEMBRO3...
-
-                //MIEMBRO4...
-
-                //MIEMBRO5...
+                var oficinaXml = OficinasRepository.createOficinaObject(rowValues);
+                oficinas.Add(oficinaXml);
             }
 
-            xmlWriter.WriteEndElement();
-            xmlWriter.WriteEndDocument();
+            return oficinas;
         }
 
-        //XML generado con objetos (POTENCIALMENTE OBSOLETO):
-        public static void arrayToXML_Object(string xmlCreationRoute)
+        /// <summary>
+        /// Lee un fichero CSV ubicado en el equipo y genera un XML con los datos del CSV en la ruta indicada.
+        /// </summary>
+        /// <param name="xmlCreationRoute">Ruta local en la que se creará el documento XML resultante.</param>
+        public static void writeXML(List<Oficina> offices, string xmlCreationRoute)
         {
             XmlWriter xmlWriter = XmlWriter.Create(xmlCreationRoute);
 
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("oficina");
 
+            foreach(Oficina office in offices) 
+            { 
+                //office = OficinasRepository.createOficinaObject(fields);
 
+                xmlWriter.WriteStartElement("codigoOficina");
+                xmlWriter.WriteElementString("codigo", office.id);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("denominacionOficina");
+                xmlWriter.WriteElementString("denominacion", office.denominacion);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("codigoCeco");
+                xmlWriter.WriteElementString("ceco", office.codCeco);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("codigoOficinaDirecta");
+                xmlWriter.WriteElementString("oficinaDirecta", office.codOficinaDirecta);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("codigoOficinaDelegada");
+                xmlWriter.WriteElementString("oficinaDelegada", office.codOficinaDelegada);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("codigoDT");
+                xmlWriter.WriteElementString("codDT", office.codDirTerritorial);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("denominacionDT");
+                xmlWriter.WriteElementString("denomDT", office.denominacionDirTerritorial);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("codigoDGT");
+                xmlWriter.WriteElementString("codDGT", office.codDGT);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("denominacionDGT");
+                xmlWriter.WriteElementString("denomDGT", office.denominacionDGT);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("codigoSubcentral");
+                xmlWriter.WriteElementString("codSubcentral", office.codSubcentral);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("denominacionSubcentral");
+                xmlWriter.WriteElementString("denomSubcentral", office.denominacionSubcentral);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("claveProduccion");
+                xmlWriter.WriteElementString("claveProd", office.claveProduccion);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("codTipoOficina");
+                xmlWriter.WriteElementString("codTipoOf", office.codTipo);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("denominacionTipoOficina");
+                xmlWriter.WriteElementString("denomTipo", office.denominacionTipo);
+                xmlWriter.WriteEndElement();
+
+                //DIRECCIÓN...
+                xmlWriter.WriteStartElement("codigoTipoVia");
+                xmlWriter.WriteElementString("codTipoVia", office.codTipoVia);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("denominacionTipoVia");
+                xmlWriter.WriteElementString("denomTipoVia", office.denominacionTipoVia);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("denominacionVia");
+                xmlWriter.WriteElementString("denomVia", office.denominacionVia);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("numeroVia");
+                xmlWriter.WriteElementString("numVia", office.numeroVia);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("complementoDenominacionVia");
+                xmlWriter.WriteElementString("compDenomVia", office.complementoDenominacionVia);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("codigoPostal");
+                xmlWriter.WriteElementString("codPostal", office.codigoPostal);
+                xmlWriter.WriteEndElement();
+
+                 //PROVINCIA...
+                xmlWriter.WriteStartElement("codigoProvincia");
+                xmlWriter.WriteElementString("codProvincia", office.codProvincia);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("denominacionProvincia");
+                xmlWriter.WriteElementString("denomProvincia", office.denominacionProvincia);
+                xmlWriter.WriteEndElement();
+
+                //LOCALIDAD...
+                xmlWriter.WriteStartElement("codigoLocalidad");
+                xmlWriter.WriteElementString("codLocalidad", office.codLocalidad);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("denominacionLocalidad");
+                xmlWriter.WriteElementString("denomLocalidad", office.denominacionLocalidad);
+                xmlWriter.WriteEndElement();
+
+                //TELÉFONOS...
+                xmlWriter.WriteStartElement("telefonosOficina1");
+                xmlWriter.WriteElementString("tlfsOficina1", office.telefonosOficina1);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("telefonosOficina2");
+                xmlWriter.WriteElementString("tlfsOficina2", office.telefonosOficina2);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("telefonosOficina3");
+                xmlWriter.WriteElementString("tlfsOficina3", office.telefonosOficina3);
+                xmlWriter.WriteEndElement();
+
+                //FAX/CORREO...
+                xmlWriter.WriteStartElement("faxOficina");
+                xmlWriter.WriteElementString("fax", office.fax);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("emailOficina");
+                xmlWriter.WriteElementString("email", office.email);
+                xmlWriter.WriteEndElement();
+
+                //HORARIOS:
+                xmlWriter.WriteStartElement("horarioNormalW");
+                xmlWriter.WriteElementString("horaNormalW", office.horarioNormalW);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("horarioNormalV");
+                xmlWriter.WriteElementString("horaNormalV", office.horarioNormalV);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("indHorarioNormalS");
+                xmlWriter.WriteElementString("indHoraNormalS", office.indHorarioNormalS);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("horarioNormalS");
+                xmlWriter.WriteElementString("horaNormalS", office.horarioNormalS);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("horarioVeranoW");
+                xmlWriter.WriteElementString("horaVeranoW", office.horarioVeranoW);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("horarioVeranoV");
+                xmlWriter.WriteElementString("horaVeranoV", office.horarioVeranoV);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("indHorarioVeranoS");
+                xmlWriter.WriteElementString("indHoraVeranoS", office.indHorarioVeranoS);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("horarioVeranoS");
+                xmlWriter.WriteElementString("horarioVeranoS", office.horarioVeranoS);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("periodoVeranoSN");
+                xmlWriter.WriteElementString("perVeranoSN", office.periodoVeranoSN);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("periodoInicioVerano");
+                xmlWriter.WriteElementString("perInicioVerano", office.periodoInicioVerano);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("periodoFinVerano");
+                xmlWriter.WriteElementString("perFinVerano", office.periodoFinVerano);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("horarioObservaciones");
+                xmlWriter.WriteElementString("horaObservaciones", office.horarioObservaciones);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("horarioObservacionesVerano");
+                xmlWriter.WriteElementString("horaObservacionesVerano", office.horarioObservacionesVerano);
+                xmlWriter.WriteEndElement();
+
+                //TODO: Create XML tags for every Responsable/Miembro object property in:
+
+                //RESPONSABLE1...
+                xmlWriter.WriteStartElement("responsable");
+                xmlWriter.WriteElementString("responsble", office.miembros.responsables.ElementAt(0).ToString());
+                xmlWriter.WriteEndElement();
+
+                //RESPONSABLE2...
+                xmlWriter.WriteStartElement("responsable");
+                xmlWriter.WriteElementString("responsble", office.miembros.responsables.ElementAt(1).ToString());
+                xmlWriter.WriteEndElement();
+
+                //MIEMBRO1...
+                xmlWriter.WriteStartElement("miembro");
+                xmlWriter.WriteElementString("", office.miembros.miembros.ElementAt(0).ToString());
+                xmlWriter.WriteEndElement();
+
+                //MIEMBRO2...
+                xmlWriter.WriteStartElement("miembro");
+                xmlWriter.WriteElementString("", office.miembros.miembros.ElementAt(1).ToString());
+                xmlWriter.WriteEndElement();
+
+                //MIEMBRO3...
+                xmlWriter.WriteStartElement("miembro");
+                xmlWriter.WriteElementString("", office.miembros.miembros.ElementAt(2).ToString());
+                xmlWriter.WriteEndElement();
+
+                //MIEMBRO4...
+                xmlWriter.WriteStartElement("miembro");
+                xmlWriter.WriteElementString("", office.miembros.miembros.ElementAt(3).ToString());
+                xmlWriter.WriteEndElement();
+
+                //MIEMBRO5...
+                xmlWriter.WriteStartElement("miembro");
+                xmlWriter.WriteElementString("", office.miembros.miembros.ElementAt(4).ToString());
+                xmlWriter.WriteEndElement();
+            }
 
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndDocument();

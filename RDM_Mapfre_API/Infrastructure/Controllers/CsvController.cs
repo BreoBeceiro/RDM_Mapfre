@@ -13,10 +13,11 @@ namespace RDM_Mapfre_API.Infrastructure.Controllers
     {
         [HttpGet]
         [Route("CSVparser")]
-        public IActionResult ConverteCVStoXMLs(string csvRoute)
+        public IActionResult ConverteCSVtoXMLs(string csvRoute)
         {
-            //TO DO: Las rutas de los ficheros se almacenarán en el archivo 'AppRoutes.yaml':
-            CSVtoXML.writeXML(@"C:\Users\breogan.beceirocasti\Desktop\PruebaEscritura.xml");
+            //TODO: Files routes will be recovered from 'AppRoutes.yaml':
+            List<Oficina> oficinas = CSVtoXML.readCSV(csvRoute);
+            CSVtoXML.writeXML(oficinas, @"C:\Users\breogan.beceirocasti\Desktop\PruebaEscritura.xml");
 
             return Ok();
         }
