@@ -15,9 +15,11 @@ namespace RDM_Mapfre_API.Infrastructure.Controllers
         [Route("CSVparser")]
         public IActionResult ConverteCSVtoXMLs(string csvRoute)
         {
-            //TODO: Files routes will be recovered from 'AppRoutes.yaml':
-            List<Oficina> oficinas = CSVtoXML.readCSV(csvRoute);
-            CSVtoXML.writeXML(oficinas, @"C:\Users\breogan.beceirocasti\Desktop\PruebaEscritura.xml");
+            //TO DO: Las rutas de los ficheros se almacenarán en el archivo 'AppRoutes.yaml':
+            var myBusinessRoute = YamlReader.ReadYml("fileRoutes", "MyBusinessRoute");
+            List<Oficina> oficinas = CSVtoXML.csvToXML(myBusinessRoute.ToString());
+            CSVtoXML.OficinaObjectToXml(oficinas);
+            CSVtoXML.writeXML(myBusinessRoute.ToString());
 
             return Ok();
         }
