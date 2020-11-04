@@ -1,14 +1,15 @@
-﻿using System;
+﻿using RDM_Mapfre_API.Infrastructure.Models.ComparingCSV;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace RDM_Mapfre_API.Infrastructure.Modules
 {
-    public static class OficinasRepository
+    public static class OficinasComparingRepository
     {
         /// <summary>
-        /// Declare and initialize one Oficina object instance giving an array of strings.
+        /// Declare and initialize one Comparing Oficina object instance giving an array of strings.
         /// </summary>
         /// <param name="values">Input array which values will be transfered to the Oficina object.</param>
         /// <returns>The initialized Oficina object.</returns>
@@ -252,6 +253,53 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
             office.miembros.miembros.Add(miembro5);
 
             return office;
+        }
+
+        /// <summary>
+        /// Go over the Oficina objects list collecting the ids in a new list.
+        /// </summary>
+        /// <param name="offices">The Oficina objects list whose ids will be collected.</param>
+        /// <returns>A list of string which are the Oficinas id.</returns>
+        public static List<string> getOficinasId(List<Oficina> offices)
+        {
+            List<string> idList = new List<string>();
+
+            foreach (Oficina office in offices)
+            {
+                idList.Add(office.id);
+            }
+
+            return idList;
+        }
+
+        /// <summary>
+        /// Find an Oficina object according to a given id.
+        /// </summary>
+        /// <param name="offices">Oficina objects list where the expected Oficina is placed.</param>
+        /// <param name="_id">The single identificator of the Oficina object that want to be recovered.</param>
+        /// <returns>The Oficina object once found or NULL if it was not (or if an exception took place).</returns>
+        public static Oficina getOficinaById(List<Oficina> offices, string _id)
+        {
+            Oficina foundOficina = null;
+
+            try
+            {
+                foreach (var office in offices)
+                {
+                    if (office.id == _id)
+                    {
+                        foundOficina = office;
+                        break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                var _ = e.Message;
+                foundOficina = null;
+            }
+
+            return foundOficina;
         }
     }
 }
