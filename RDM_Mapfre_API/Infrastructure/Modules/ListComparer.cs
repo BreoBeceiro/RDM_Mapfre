@@ -11,37 +11,58 @@ using Oficina = RDM_Mapfre_API.Infrastructure.Models.ReferenceCSV.Oficina;
 namespace RDM_Mapfre_API.Infrastructure.Modules
 {
     public static class ListComparer
-    {/*
+    {
+        //Inyectar listas por constructor.
+
+        //AL EDITAR LOS FICHEROS csv PARA LAS PRUEBAS, A VECES SE PIERDE EL FORMATO, CON LO QUE EL ARCHIVO SE LEE PERO NO SE CONVIERTE A ARRAY, PUES
+        //  EL CARACTER SEPARADOR DEJA DE SER ';', DE MODO QUE SE PRODUCE UNA EXCEPCIÓN AL INSTANCIAR EL OBJETO EN OficinasComparingRepository.
+
         /// <summary>
-        /// Compare two lists in order to determine if they contein the same data.
+        /// Compare two lists in order to determine if they contain the same elements acording to their IDs. This method verifies that the existing
+        /// elements in the reference list are also present in the comparing list.
         /// </summary>
-        /// <param name="list1">First list for comparing.</param>
-        /// <param name="list2">Second list for comparing.</param>
-        /// <returns>TRUE if lists contain same data, FALSE if not.</returns>
-        public static bool checkIfListsAreEqual(List<Models.ReferenceCSV.Oficina> list1, List<Models.ComparingCSV.Oficina> list2)
+        /// <param name="referenceList">Reference list with which comparing list will be contrasted.</param>
+        /// <param name="comparingList">Comparing list that may have different objects than the reference list.</param>
+        /// <returns>TRUE if both lists got the same elements, FALSE if not.</returns>
+        public static bool checkIfListsAreEqual(List<Models.ReferenceCSV.Oficina> referenceList, List<Models.ComparingCSV.Oficina> comparingList)
         {
-            List<Oficina> list3;
-            bool areEqual = false;
+            List<string> referenceListIDs = OficinasReferenceRepository.getOficinasId(referenceList);
+            List<string> comparingListIDs = OficinasComparingRepository.getOficinasId(comparingList);
 
-            list3 = list1.Except(list2).ToList();
-
-            if (list3.Count == 0)
+            foreach (string officeID in referenceListIDs)
             {
-                areEqual = true;
+                if (!comparingListIDs.Contains(officeID))
+                {
+                    //Si un solo ID de la lista de referencia no se encuentra en la de comparación, se puede determinar que las listas no son iguales.
+                    return false;
+                    
+                }
             }
 
-            return areEqual;
-        }*/
+            return true;
+        }
 
         /// <summary>
-        /// Find all the elements in 'list1' that does not exist in 'list2'.
+        /// Find all the elements in 'referenceList' that does not exist in 'comparingList'.
         /// </summary>
-        /// <param name="list1">The list where new elements exist.</param>
-        /// <param name="list2">The list which will be compared with the other.</param>
+        /// <param name="referenceList">Reference list with which comparing list will be contrasted.</param>
+        /// <param name="comparingList">The list that might have new elements.</param>
         /// <returns>A list with those new elements.</returns>
-        public static List<Oficina> checkIfListHaveNewElements(List<Models.ReferenceCSV.Oficina> list1, List<Models.ComparingCSV.Oficina> list2)
+        public static List<Models.ComparingCSV.Oficina> getNewElements(List<Models.ReferenceCSV.Oficina> referenceList, List<Models.ComparingCSV.Oficina> comparingList)
         {
-            List<Oficina> newOffices = list1.Where(list1Office => !list2.Any(list2Office => list2Office.id == list1Office.codigoTienda)).ToList();
+            List<string> referenceListIDs = OficinasReferenceRepository.getOficinasId(referenceList);
+            List<string> comparingListIDs = OficinasComparingRepository.getOficinasId(comparingList);
+            List<Models.ComparingCSV.Oficina> newOffices = new List<Models.ComparingCSV.Oficina>();
+
+            foreach (string officeID in comparingListIDs)
+            {
+                if (!referenceListIDs.Contains(officeID))
+                {
+                    //Si un ID de la lista de comparación no se encuentra en la de referencia, el objeto que tenga ese ID debe guardarse en una nueva 
+                    //  lista para generar con ella, posteriormente, un XML.
+                    newOffices.Add(OficinasComparingRepository.getOficinaById(comparingList, officeID));
+                }
+            }
 
             return newOffices;
         }
@@ -49,51 +70,39 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="list1"></param>
-        /// <param name="list2"></param>
+        /// <param name="referenceList"></param>
+        /// <param name="comparingList"></param>
         /// <returns></returns>
-        public static List<Oficina> checkIfListHasModifiedElements(List<Oficina> list1, List<Models.ComparingCSV.Oficina> list2)
+        public static List<Oficina> checkIfComparingListHasModifiedElements(List<Oficina> referenceList, List<Models.ComparingCSV.Oficina> comparingList)
         {
             //BASTA CON QUE HAYA UN SOLO ATRIBUTO MODIFICADO PARA QUE ESE OBJETO TENGA QUE IR A LA LISTA DE OBJETOS MODIFICADOS.
             List<Oficina> modifiedOficinas = new List<Oficina>();
 
             //1.Recorres las listas de oficinas recogiendo los IDs:
-            List<string> list1Id = OficinasReferenceRepository.getOficinasId(list1);
-            List<string> list2Id = OficinasComparingRepository.getOficinasId(list2);
-
-            PropertyInfo[] properties = typeof(Oficina).GetProperties();
+            List<string> referenceListIDs = OficinasReferenceRepository.getOficinasId(referenceList);
+            List<string> comparingListIDs = OficinasComparingRepository.getOficinasId(comparingList);
     
-            foreach (var officeId in list1Id)
+            foreach (var referenceOfficeId in referenceListIDs)
             {
                 //2.Recorriendo la lista de IDs, se utiliza el identificador en cada iteracción para obtener el objeto de las dos listas:
-                Oficina list1Oficina = OficinasReferenceRepository.getOficinaById(list1, officeId);
-                Models.ComparingCSV.Oficina list2Oficina = OficinasComparingRepository.getOficinaById(list2, officeId);
+                Oficina referenceOficina = OficinasReferenceRepository.getOficinaById(referenceList, referenceOfficeId);
+                Models.ComparingCSV.Oficina comparingOficina = OficinasComparingRepository.getOficinaById(comparingList, referenceOfficeId);
 
                 //If any of the objects comes NULL, its 'id' property was not found, so iteration is avoided:
-                if (list1Oficina == null || list2Oficina == null)
+                if (referenceOficina == null || comparingOficina == null)
                 {
                     continue;
                 }
 
-                foreach (PropertyInfo property in properties)
+                if (referenceOficina != comparingOficina)
                 {
-                    //Recorriendo las propiedades de los objetos, evaluamos una a una si tienen el mismo valor:
-
-                    //OJO: ESTO AHORA NO VALE PORQUE LOS OBJETOS Oficina DE COMPARACIÓN Y REFERENCIA NO TIENEN LOS MISMOS ATRIBUTOS
-                    var list1OficinaPropertyValue = property.GetValue(list1Oficina);
-                    var list2OficinaPropertyValue = property.GetValue(list2Oficina);
-
-                    //3. Comparas atributos (si una pareja de atributos tiene valores diferentes, en ese elemento ya hubo una modificación,
-                    //  de modo que se añade a la lista de salida y se salta al siguiente objeto):
-                    if (!list1OficinaPropertyValue.Equals(list2OficinaPropertyValue))
-                    {
-                        modifiedOficinas.Add(list1Oficina);
-                        break;
-                    }
+                    modifiedOficinas.Add(referenceOficina);
                 }
             }
 
             return modifiedOficinas;
         }
+
+        //FALTA EL MÉTODO DE ELEMENTOS ELIMINADOS.
     }
 }

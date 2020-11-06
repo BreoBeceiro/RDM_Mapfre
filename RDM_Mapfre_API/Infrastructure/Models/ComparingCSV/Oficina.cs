@@ -96,6 +96,84 @@ namespace RDM_Mapfre_API.Infrastructure.Models.ComparingCSV
         public string horarioObservacionesVerano { get; set; }
 
         public Miembros miembros { get; set; }
+
+
+        public static bool operator ==(Models.ComparingCSV.Oficina referenceOficina, Models.ReferenceCSV.Oficina comparingOficina)
+        {
+            if (referenceOficina.id != comparingOficina.codigoTienda)
+            {
+                return false;
+            }
+            else if (referenceOficina.codCeco != comparingOficina.ceco)
+            {
+                return false;
+            }
+            else if (referenceOficina.codOficinaDirecta != comparingOficina.idOficinaDirecta)
+            {
+                return false;
+            }
+            else if (referenceOficina.codOficinaDelegada != comparingOficina.idOficinaDelegada)
+            {
+                return false;
+            }
+            else if (referenceOficina.codDGT != comparingOficina.idDGT)
+            {
+                return false;
+            }
+            else if (referenceOficina.codDirTerritorial != comparingOficina.idDirTerritorial)
+            {
+                return false;
+            }
+            else if (referenceOficina.fax != comparingOficina.fax)
+            {
+                return false;
+            }
+            else if(referenceOficina.denominacionLocalidad != comparingOficina.municipio)
+            {
+                //OJO!! PUEDE NO SER LO MISMO
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool operator !=(Models.ComparingCSV.Oficina referenceOficina, Models.ReferenceCSV.Oficina comparingOficina)
+        {
+            if (referenceOficina.id != comparingOficina.codigoTienda)
+            {
+                return true;
+            }
+            else if (referenceOficina.codCeco != comparingOficina.ceco)
+            {
+                return true;
+            }
+            else if (referenceOficina.codOficinaDirecta != comparingOficina.idOficinaDirecta)
+            {
+                return true;
+            }
+            else if (referenceOficina.codOficinaDelegada != comparingOficina.idOficinaDelegada)
+            {
+                return true;
+            }
+            else if (referenceOficina.codDGT != comparingOficina.idDGT)
+            {
+                return true;
+            }
+            else if (referenceOficina.codDirTerritorial != comparingOficina.idDirTerritorial)
+            {
+                return true;
+            }
+            else if (referenceOficina.fax != comparingOficina.fax)
+            {
+                return true;
+            }
+            else if (referenceOficina.denominacionLocalidad != comparingOficina.municipio)
+            {
+                //OJO!! PUEDE NO SER LO MISMO
+                return true;
+            }
+            return false;
+        }
     }
 
 }

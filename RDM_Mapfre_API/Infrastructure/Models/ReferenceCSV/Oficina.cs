@@ -92,5 +92,17 @@ namespace RDM_Mapfre_API.Infrastructure.Models.ReferenceCSV
         public string idOficinaDelegada { get; set; }
 
         public string ceco { get; set; }
+
+
+        public static bool operator ==(Models.ReferenceCSV.Oficina referenceOficina, Models.ComparingCSV.Oficina comparingOficina)
+        {
+            return referenceOficina.codigoTienda == comparingOficina.id ? true : false;
+
+        }
+
+        public static bool operator !=(Models.ReferenceCSV.Oficina referenceOficina, Models.ComparingCSV.Oficina comparingOficina)
+        {
+            return referenceOficina.codigoTienda != comparingOficina.id ? true : false; ;
+        }
     }
 }

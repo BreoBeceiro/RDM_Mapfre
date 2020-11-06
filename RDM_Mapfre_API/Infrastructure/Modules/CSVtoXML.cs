@@ -23,7 +23,7 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
             List<Oficina> oficinas = new List<Oficina>();
             var myBusinessRoute = YamlReader.ReadYml("fileRoutes", "MyBusinessRoute");
 
-            Stream file = File.OpenRead($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\01072020_ListadoOficinas.csv");
+            Stream file = File.OpenRead(csvLocalRoute);
             var fileReader = new StreamReader(file);
 
             #region "Aportaciones de Víctor"
@@ -91,13 +91,11 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
         /// <summary>
         /// Once given a Reference Oficina object list, this method gives XML format to every element of the list, then creates and
         /// writes one XML file containing the data of that Oficina object.
-        /// in a especific route.
         /// </summary>
         /// <param name="oficinaList"></param>
         /// <returns></returns>
         public static bool writeXML(List<Oficina> oficinaList)
         {
-
             foreach (Oficina oficina in oficinaList)
             {
                 XmlSerializer xsSubmit = new XmlSerializer(typeof(Oficina));
@@ -115,6 +113,36 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
                     }
                 }
                 
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Once given a Comparing Oficina object list, this method gives XML format to every element of the list, then creates and
+        /// writes one XML file containing the data of that Oficina object.
+        /// </summary>
+        /// <param name="oficinaList"></param>
+        /// <returns></returns>
+        public static bool writeXML(List<Models.ComparingCSV.Oficina> oficinaList)
+        {
+            foreach (Models.ComparingCSV.Oficina oficina in oficinaList)
+            {
+                XmlSerializer xsSubmit = new XmlSerializer(typeof(Models.ComparingCSV.Oficina));
+                var xml = "";
+
+                using (var sww = new StringWriter())
+                {
+                    using (XmlWriter writer = XmlWriter.Create(sww))
+                    {
+                        xsSubmit.Serialize(writer, oficina);
+                        xml = sww.ToString();
+
+                        //TODO: Write the resulting file wherever it must be written.
+                        WriteXMLInPath(PrintXML(xml), $"c:/Users/breogan.beceirocasti/Desktop/FicherosGenerados/{oficina.id}.xml");
+                    }
+                }
+
             }
 
             return true;

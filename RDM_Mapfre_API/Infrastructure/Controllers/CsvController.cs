@@ -18,20 +18,21 @@ namespace RDM_Mapfre_API.Infrastructure.Controllers
         {
             //TODO: Files routes will be recovered from 'AppRoutes.yaml'.
 
-            List<Oficina> oficinas1 = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\01072020_ListadoOficinas.csv");
+            //List<Oficina> oficinas1 = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\01072020_ListadoOficinas.csv");
 
             //List<Oficina> oficinas2 = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\Ficheros\\MyBusiness_27102020.csv");
-            List<Models.ComparingCSV.Oficina> oficinas2 = CSVtoXML.readComparingCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\MyBusiness_21072020.csv");
+            List<Models.ComparingCSV.Oficina> oficinasComparacion = CSVtoXML.readComparingCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\MyBusiness.csv");
+            List<Models.ReferenceCSV.Oficina> oficinasReferencia = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\ListadoOficinas.csv");
 
             //CSVtoXML.writeXML(oficinas, @"C:\Users\breogan.beceirocasti\Desktop\PruebaEscritura.xml");
 
-            //ListComparer.checkIfListsAreEqual(oficinas1, oficinas2);
+            ListComparer.checkIfComparingListHasModifiedElements(oficinasReferencia, oficinasComparacion);
             //ListComparer.checkIfListHaveNewElements(oficinas1, oficinas2);
             //ListComparer.checkIfListHasModifiedElements(oficinas1, oficinas2);
             
             //var myBusinessRoute = YamlReader.ReadYml("fileRoutes", "MyBusinessRoute");
-            List<Oficina> oficinas = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\01072020_ListadoOficinas.csv");
-            CSVtoXML.writeXML(oficinas);
+            //List<Oficina> oficinas = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\01072020_ListadoOficinas.csv");
+            //CSVtoXML.writeXML(oficinas);
 
             return Ok();
         }
