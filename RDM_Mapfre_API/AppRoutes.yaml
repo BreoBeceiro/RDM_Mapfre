@@ -4,4 +4,5 @@
     OficinasEnAltaRoute: OficinasEnAlta TEXT
     OficinasEnBaja: OficinasEnBaja TEXT
     OficinasModificadas: OficinasModificadas TEXT
-...
+constants:
+    NumeroMinimoDeBajasParaEnviarCorreo: 11

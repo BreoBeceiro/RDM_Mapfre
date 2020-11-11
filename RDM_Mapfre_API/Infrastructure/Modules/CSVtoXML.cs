@@ -109,7 +109,7 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
                         xml = sww.ToString(); 
 
                         //TODO: Write the resulting file wherever it must be written.
-                        WriteXMLInPath(PrintXML(xml), $"c:/Users/breogan.beceirocasti/Desktop/FicherosGenerados/{oficina.codigoTienda}.xml");
+                        WriteXMLInPath(PrintXML(xml), $"c:/Users/breogan.beceirocasti/Desktop/FicherosGenerados/{oficina.id}.xml");
                     }
                 }
                 

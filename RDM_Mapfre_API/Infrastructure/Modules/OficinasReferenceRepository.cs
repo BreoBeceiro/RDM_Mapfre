@@ -17,61 +17,111 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
         {
             Oficina office = new Oficina()
             {
-                codigoTienda = values[0],
-                nombreEmpresa = values[1],
-                categoriaPrincipal = values[2],
-                direccionLinea1 = values[3],
-                direccionLinea2 = values[4],
-                direccionLinea3 = values[5],
-                direccionLinea4 = values[6],
-                direccionLinea5 = values[7],
-                municipio = values[8],
-                areaAdministrativa = values[9],
-                pais = values[10],
-                codigoPostal = values[11],
-                telefonoPrincipal = values[12],
-                fax = values[13],
-                horarioLunes = values[14],
-                horarioMartes = values[15],
-                horarioMiercoles = values[16],
-                horarioJueves = values[17],
-                horarioViernes = values[18],
-                horarioSabado = values[19],
-                periodoVerano = values[20],
-                abiertoSabados = values[21],
+                id = values[0],
+                denominacion = values[1],
+                ceco = values[2],
+                idOficinaDirecta = values[3],
+                idOficinaDelegada = values[4],
+                idDirTerritorial = values[5],
+                denominacionDirTerritorial = values[6],
+                idDGT = values[7],
+                denominacionDGT = values[8],
+                codSubcentral = values[9],
+                denominacionSubcentral = values[10],
+                claveProduccion = values[11],
+                codTipo = values[12],
+                denominacionTipo = values[13],
+                codTipoVia = values[14],
+                denominacionTipoVia = values[15],
+                denominacionVia = values[16],
+                numeroVia = values[17],
+                complementoDenominacionVia = values[18],
+                codigoPostal = values[19],
+                codProvincia = values[20],
+                denominacionProvincia = values[21],
+                codLocalidad = values[22],
+                denominacionLocalidad = values[23],
+                telefonosOficina1 = values[24],
+                telefonosOficina2 = values[25],
+                telefonosOficina3 = values[26],
+                fax = values[27],
+                email = values[28],
 
-                miembro1 = new Miembro()
+                horarioNormalW = values[29],
+                horarioNormalV = values[30],
+                indHorarioNormalS = values[31],
+                horarioNormalS = values[32],
+                horarioVeranoW = values[33],
+                horarioVeranoV = values[34],
+                indHorarioVeranoS = values[35],
+                horarioVeranoS = values[36],
+                periodoVeranoSN = values[37],
+                periodoInicioVerano = values[38],
+                periodoFinVerano = values[39],
+                horarioObservaciones = values[40],
+                horarioObservacionesVerano = values[41],
+
+                miembros = new Miembros()
                 {
-                    nombre = values[22],
-                    nuuma = values[23],
-                    perfil = values[24],
-                    email = values[25]
-                },
+                    responsables = new List<Responsable>()
+                    {
+                        new Responsable()
+                        {
+                            codigo = values[42],
+                            nombre = values[43],
+                            nuuma = values[44],
+                            perfil = values[45],
+                            email = values[46]
+                        },
+                        new Responsable()
+                        {
+                            codigo = values[47],
+                            nombre = values[48],
+                            nuuma = values[49],
+                            perfil = values[50],
+                            email = values[51]
+                        }
+                    },
 
-                miembro2 = new Miembro()
-                {
-                    nombre = values[26],
-                    nuuma = values[27],
-                    perfil = values[28],
-                    email = values[29]
-                },
-
-                otrosTelefonos = values[30],
-                horarioEspecial = values[31],
-                desdeLaEmpresa = values[32],
-                fechaDeApertura = values[33],
-                fotoDePerfil = values[34],
-                fotoDePortada = values[35],
-                otrasFotos = values[36],
-                fotoPreferida = values[37],
-                latitud = values[38],
-                longitud = values[39],
-                sitioWeb = values[40],
-                idDGT = values[41],
-                idDirTerritorial = values[42],
-                idOficinaDirecta = values[43],
-                idOficinaDelegada = values[44],
-                ceco = values[45]
+                    miembros = new List<Miembro>()
+                    {
+                        new Miembro()
+                        {
+                            nombre = values[52],
+                            nuuma = values[53],
+                            perfil = values[54],
+                            email = values[55]
+                        },
+                        new Miembro()
+                        {
+                            nombre = values[56],
+                            nuuma = values[57],
+                            perfil = values[58],
+                            email = values[59]
+                        },
+                        new Miembro()
+                        {
+                            nombre = values[60],
+                            nuuma = values[61],
+                            perfil = values[62],
+                            email = values[63]
+                        },
+                        new Miembro()
+                        {
+                            nombre = values[64],
+                            nuuma = values[65],
+                            perfil = values[66],
+                            email = values[67]
+                        },
+                        new Miembro()
+                        {
+                            nombre = values[68],
+                            nuuma = values[69],
+                            perfil = values[70],
+                            email = values[71]
+                        }
+                    }
+                }
             };
 
             return office;
@@ -88,7 +138,7 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
 
             foreach (Models.ReferenceCSV.Oficina office in offices)
             {
-                idList.Add(office.codigoTienda);
+                idList.Add(office.id);
             }
 
             return idList;
@@ -108,7 +158,7 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
             {
                 foreach (var office in offices)
                 {
-                    if (office.codigoTienda == _id)
+                    if (office.id == _id)
                     {
                         foundOficina = office;
                         break;

@@ -5,31 +5,27 @@ using System.Runtime.InteropServices;
 
 namespace RDM_Mapfre_API.Infrastructure.Models.ComparingCSV
 {
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
     public class Oficina
     {
         public string id { get; set; }
 
         public string denominacion { get; set; }
 
-        public string codCeco { get; set; }
+        public string ceco { get; set; }
 
-        public string codOficinaDirecta { get; set; }
+        public string idOficinaDirecta { get; set; }
 
-        public string codOficinaDelegada { get; set; }
+        public string idOficinaDelegada { get; set; }
 
-        public string codDirTerritorial { get; set; }
+        public string idDirTerritorial { get; set; }
 
-        public string denominacionDirTerritorial { get; set; }
+        public string denominacionDirTerritorial { get; set; } // NO SE TIENE QUE REFLEJAR EN EL XML?? (PÁGINA 8 DEL DOCUMENTO DE Mapfre)
 
-        public string codDGT { get; set; }
+        public string idDGT { get; set; }
 
-        public string denominacionDGT { get; set; }
+        public string denominacionDGT { get; set; } // NO SE TIENE QUE REFLEJAR EN EL XML?? (PÁGINA 8 DEL DOCUMENTO DE Mapfre)
 
-        public string codSubcentral { get; set; }
+        public string codSubcentral { get; set; } //
 
         public string denominacionSubcentral { get; set; }
 
@@ -98,37 +94,44 @@ namespace RDM_Mapfre_API.Infrastructure.Models.ComparingCSV
         public Miembros miembros { get; set; }
 
 
-        public static bool operator ==(Models.ComparingCSV.Oficina referenceOficina, Models.ReferenceCSV.Oficina comparingOficina)
+        public static bool operator ==(Models.ComparingCSV.Oficina comparingOficina, Models.ReferenceCSV.Oficina referenceOficina)
         {
-            if (referenceOficina.id != comparingOficina.codigoTienda)
+            if (referenceOficina.id != comparingOficina.id)
             {
                 return false;
             }
-            else if (referenceOficina.codCeco != comparingOficina.ceco)
+
+            if (referenceOficina.ceco != comparingOficina.ceco)
             {
                 return false;
             }
-            else if (referenceOficina.codOficinaDirecta != comparingOficina.idOficinaDirecta)
+
+            if (referenceOficina.idOficinaDirecta != comparingOficina.idOficinaDirecta)
             {
                 return false;
             }
-            else if (referenceOficina.codOficinaDelegada != comparingOficina.idOficinaDelegada)
+
+            if (referenceOficina.idOficinaDelegada != comparingOficina.idOficinaDelegada)
             {
                 return false;
             }
-            else if (referenceOficina.codDGT != comparingOficina.idDGT)
+
+            if (referenceOficina.idDGT != comparingOficina.idDGT)
             {
                 return false;
             }
-            else if (referenceOficina.codDirTerritorial != comparingOficina.idDirTerritorial)
+
+            if (referenceOficina.idDirTerritorial != comparingOficina.idDirTerritorial)
             {
                 return false;
             }
-            else if (referenceOficina.fax != comparingOficina.fax)
+
+            if (referenceOficina.fax != comparingOficina.fax)
             {
                 return false;
             }
-            else if(referenceOficina.denominacionLocalidad != comparingOficina.municipio)
+
+            if (referenceOficina.denominacionLocalidad != comparingOficina.denominacionLocalidad)
             {
                 //OJO!! PUEDE NO SER LO MISMO
                 return false;
@@ -137,41 +140,49 @@ namespace RDM_Mapfre_API.Infrastructure.Models.ComparingCSV
             return true;
         }
 
-        public static bool operator !=(Models.ComparingCSV.Oficina referenceOficina, Models.ReferenceCSV.Oficina comparingOficina)
+        public static bool operator !=(Models.ComparingCSV.Oficina comparingOficina, Models.ReferenceCSV.Oficina referenceOficina)
         {
-            if (referenceOficina.id != comparingOficina.codigoTienda)
+            if (referenceOficina.id != comparingOficina.id)
             {
                 return true;
             }
-            else if (referenceOficina.codCeco != comparingOficina.ceco)
+
+            if (referenceOficina.ceco != comparingOficina.ceco)
             {
                 return true;
             }
-            else if (referenceOficina.codOficinaDirecta != comparingOficina.idOficinaDirecta)
+
+            if (referenceOficina.idOficinaDirecta != comparingOficina.idOficinaDirecta)
             {
                 return true;
             }
-            else if (referenceOficina.codOficinaDelegada != comparingOficina.idOficinaDelegada)
+
+            if (referenceOficina.idOficinaDelegada != comparingOficina.idOficinaDelegada)
             {
                 return true;
             }
-            else if (referenceOficina.codDGT != comparingOficina.idDGT)
+
+            if (referenceOficina.idDGT != comparingOficina.idDGT)
             {
                 return true;
             }
-            else if (referenceOficina.codDirTerritorial != comparingOficina.idDirTerritorial)
+
+            if (referenceOficina.idDirTerritorial != comparingOficina.idDirTerritorial)
             {
                 return true;
             }
-            else if (referenceOficina.fax != comparingOficina.fax)
+
+            if (referenceOficina.fax != comparingOficina.fax)
             {
                 return true;
             }
-            else if (referenceOficina.denominacionLocalidad != comparingOficina.municipio)
+
+            if (referenceOficina.denominacionLocalidad != comparingOficina.denominacionLocalidad)
             {
                 //OJO!! PUEDE NO SER LO MISMO
                 return true;
             }
+
             return false;
         }
     }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RDM_Mapfre_API.Infrastructure.Models.ReferenceCSV;
+using OficinaReference = RDM_Mapfre_API.Infrastructure.Models.ReferenceCSV.Oficina;
+using OficinaComparing = RDM_Mapfre_API.Infrastructure.Models.ComparingCSV.Oficina;
 using RDM_Mapfre_API.Infrastructure.Modules;
 
 namespace RDM_Mapfre_API.Infrastructure.Controllers
@@ -18,20 +20,21 @@ namespace RDM_Mapfre_API.Infrastructure.Controllers
         {
             //TODO: Files routes will be recovered from 'AppRoutes.yaml'.
 
-            //List<Oficina> oficinas1 = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\01072020_ListadoOficinas.csv");
+            //List<OficinaReference> oficinasReferencia = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\01072020_ListadoOficinas.csv");
+            //List<OficinaComparing> oficinasComparacion = CSVtoXML.readComparingCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\Ficheros\\MyBusiness_27102020.csv");
 
-            //List<Oficina> oficinas2 = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\Ficheros\\MyBusiness_27102020.csv");
-            List<Models.ComparingCSV.Oficina> oficinasComparacion = CSVtoXML.readComparingCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\MyBusiness.csv");
-            List<Models.ReferenceCSV.Oficina> oficinasReferencia = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\ListadoOficinas.csv");
+            List<OficinaComparing> oficinasComparacion = CSVtoXML.readComparingCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\MyBusiness.csv");
+            List<OficinaReference> oficinasReferencia = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\ListadoOficinas.csv");
 
-            //CSVtoXML.writeXML(oficinas, @"C:\Users\breogan.beceirocasti\Desktop\PruebaEscritura.xml");
+            CSVtoXML.writeXML(oficinasReferencia);
 
-            ListComparer.checkIfComparingListHasModifiedElements(oficinasReferencia, oficinasComparacion);
-            //ListComparer.checkIfListHaveNewElements(oficinas1, oficinas2);
-            //ListComparer.checkIfListHasModifiedElements(oficinas1, oficinas2);
+            //ListComparer.checkIfListsGotSameOficinas(oficinasReferencia, oficinasComparacion);
+            //ListComparer.getNewOficinas(oficinasReferencia, oficinasComparacion);
+            //ListComparer.getDeletedOficinas(oficinasReferencia, oficinasComparacion);
+            //ListComparer.checkIfComparingListHasModifiedOficinas(oficinasReferencia, oficinasComparacion);
             
             //var myBusinessRoute = YamlReader.ReadYml("fileRoutes", "MyBusinessRoute");
-            //List<Oficina> oficinas = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\01072020_ListadoOficinas.csv");
+            //List<OficinaReference> oficinas = CSVtoXML.readReferenceCSV($"C:\\Users\\breogan.beceirocasti\\Desktop\\RDM\\01072020_ListadoOficinas.csv");
             //CSVtoXML.writeXML(oficinas);
 
             return Ok();

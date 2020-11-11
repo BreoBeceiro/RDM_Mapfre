@@ -19,12 +19,12 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
             {
                 id = values[0],
                 denominacion = values[1],
-                codCeco = values[2],
-                codOficinaDirecta = values[3],
-                codOficinaDelegada = values[4],
-                codDirTerritorial = values[5],
+                ceco = values[2],
+                idOficinaDirecta = values[3],
+                idOficinaDelegada = values[4],
+                idDirTerritorial = values[5],
                 denominacionDirTerritorial = values[6],
-                codDGT = values[7],
+                idDGT = values[7],
                 denominacionDGT = values[8],
                 codSubcentral = values[9],
                 denominacionSubcentral = values[10],
@@ -138,12 +138,12 @@ namespace RDM_Mapfre_API.Infrastructure.Modules
 
             office.id = values[0];
             office.denominacion = values[1];
-            office.codCeco = values[2];
-            office.codOficinaDirecta = values[3];
-            office.codOficinaDelegada = values[4];
-            office.codDirTerritorial = values[5];
+            office.ceco = values[2];
+            office.idOficinaDirecta = values[3];
+            office.idOficinaDelegada = values[4];
+            office.idDirTerritorial = values[5];
             office.denominacionDirTerritorial = values[6];
-            office.codDGT = values[7];
+            office.idDGT = values[7];
             office.denominacionDGT = values[8];
             office.codSubcentral = values[9];
             office.denominacionSubcentral = values[10];
